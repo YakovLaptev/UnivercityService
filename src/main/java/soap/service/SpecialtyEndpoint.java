@@ -1,8 +1,9 @@
 package soap.service;
 
-import localhost.soapservice.GetSpecialtyRequest;
-import localhost.soapservice.GetSpecialtyResponse;
-import localhost.soapservice.SpecialtyType;
+import localhost._8080.soapservice.GetSpecialtyRequest;
+import localhost._8080.soapservice.GetSpecialtyResponse;
+import localhost._8080.soapservice.SpecialtyType;
+import localhost._8080.soapservice.GetSpecialtyResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -14,7 +15,7 @@ import soap.repository.SpecialtyRepository;
 
 @Endpoint
 public class SpecialtyEndpoint {
-    private static final String NAMESPACE_URI = "http://localhost/soapservice";
+    private static final String NAMESPACE_URI = "http://localhost:8080/soapservice";
 
     private SpecialtyRepository specialtyRepository;
 
@@ -27,8 +28,9 @@ public class SpecialtyEndpoint {
     @ResponsePayload
     public GetSpecialtyResponse getSpecialty(@RequestPayload GetSpecialtyRequest request) {
         GetSpecialtyResponse response = new GetSpecialtyResponse();
+        System.out.println("--- "+request.getCode());
         Specialty specialty = specialtyRepository.getOne(request.getCode());
-        localhost.soapservice.Specialty responseSpecialty = new localhost.soapservice.Specialty();
+        localhost._8080.soapservice.Specialty responseSpecialty = new localhost._8080.soapservice.Specialty();
         responseSpecialty.setCode(specialty.getCode());
         responseSpecialty.setName(specialty.getName());
         responseSpecialty.setShortName(specialty.getShortName());

@@ -1,5 +1,5 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost/soapservice"
-           targetNamespace="http://localhost/soapservice" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/soapservice"
+           targetNamespace="http://localhost:8080/soapservice" elementFormDefault="qualified">
 
     <xs:element name="getSpecialtyRequest">
         <xs:complexType>
