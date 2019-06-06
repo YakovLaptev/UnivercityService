@@ -5,6 +5,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
@@ -16,6 +17,7 @@ import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
+import java.net.URL;
 import java.util.Properties;
 
 @EnableWs
@@ -44,7 +46,17 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new SimpleXsdSchema(new ClassPathResource("specialties.xsd"));
     }
 
-
+    @Bean
+    public SpecialtiesClient specialtiesClient() {
+        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+        String[] packagesToScan= {"localhost._8080"};
+        marshaller.setPackagesToScan(packagesToScan);
+        SpecialtiesClient client = new SpecialtiesClient();
+        client.setDefaultUri("http://localhost:8080/ws");
+        client.setMarshaller(marshaller);
+        client.setUnmarshaller(marshaller);
+        return client;
+    }
     /*@Bean(name="simpleMappingExceptionResolver")
     public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
         SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();
