@@ -6,19 +6,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
-import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
-import org.springframework.ws.server.EndpointExceptionResolver;
-import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
-import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
 import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
 import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
-
-import java.net.URL;
-import java.util.Properties;
 
 @EnableWs
 @Configuration
@@ -31,7 +24,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         return new ServletRegistrationBean<>(servlet, "/ws/*");
     }
 
-    @Bean(name = "specialties")
+    @Bean(name = "survey")
     public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema specialtySchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("SpecialtyPort");
@@ -43,20 +36,31 @@ public class WebServiceConfig extends WsConfigurerAdapter {
 
     @Bean
     public XsdSchema specialtySchema() {
-        return new SimpleXsdSchema(new ClassPathResource("specialties.xsd"));
+        return new SimpleXsdSchema(new ClassPathResource("survey.xsd"));
     }
 
     @Bean
-    public SpecialtiesClient specialtiesClient() {
+    public SurveyClient surveyClient() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
         String[] packagesToScan= {"localhost._8080"};
         marshaller.setPackagesToScan(packagesToScan);
-        SpecialtiesClient client = new SpecialtiesClient();
+        SurveyClient client = new SurveyClient();
         client.setDefaultUri("http://localhost:8080/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;
     }
+//    @Bean
+//    public SpecialtiesClient specialtiesClient() {
+//        Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+//        String[] packagesToScan= {"localhost._8080"};
+//        marshaller.setPackagesToScan(packagesToScan);
+//        SpecialtiesClient client = new SpecialtiesClient();
+//        client.setDefaultUri("http://localhost:8080/ws");
+//        client.setMarshaller(marshaller);
+//        client.setUnmarshaller(marshaller);
+//        return client;
+//    }
     /*@Bean(name="simpleMappingExceptionResolver")
     public SimpleMappingExceptionResolver createSimpleMappingExceptionResolver() {
         SimpleMappingExceptionResolver r = new SimpleMappingExceptionResolver();

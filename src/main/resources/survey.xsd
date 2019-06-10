@@ -1,0 +1,56 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/soapservice"
+           targetNamespace="http://localhost:8080/soapservice" elementFormDefault="qualified">
+
+    <xs:element name="getSurveyByCodeRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="code" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getSurveyByCodeResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="surveyList" type="tns:surveyList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersByCurseRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="curse" type="xs:int"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersByCurseResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="surveyList" type="tns:surveyList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="survey">
+        <xs:sequence>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="institute" type="xs:string"/>
+            <xs:element name="department" type="xs:string"/>
+            <xs:element name="specialtyCode" type="xs:string"/>
+            <xs:element name="specialty" type="xs:string"/>
+            <xs:element name="curse" type="xs:int"/>
+            <xs:element name="studyForm" type="xs:string"/>
+            <xs:element name="answer1" type="xs:string"/>
+            <xs:element name="answer2" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+
+
+    <xs:complexType name="surveyList">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="value" type="tns:survey" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

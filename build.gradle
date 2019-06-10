@@ -24,7 +24,7 @@ repositories {
 task genJaxb {
     ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
     ext.classesDir = "${buildDir}/classes/jaxb"
-    ext.schema = "src/main/resources/specialties.xsd"
+    ext.schema = "src/main/resources/survey.xsd"
 
     outputs.dir classesDir
 
