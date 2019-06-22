@@ -1,65 +1,270 @@
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://localhost:8080/soapservice" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://localhost:8080/soapservice" targetNamespace="http://localhost:8080/soapservice">
-    <wsdl:types>
-        <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://localhost:8080/soapservice">
-            <xs:element name="getSpecialtyRequest">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="code" type="xs:string"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:element name="getSpecialtyResponse">
-                <xs:complexType>
-                    <xs:sequence>
-                        <xs:element name="specialty" type="tns:specialty"/>
-                    </xs:sequence>
-                </xs:complexType>
-            </xs:element>
-            <xs:complexType name="specialty">
+<wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://localhost:8080/soapservice">
+        <xs:element name="getAnswersByCodeRequest">
+            <xs:complexType>
                 <xs:sequence>
                     <xs:element name="code" type="xs:string"/>
-                    <xs:element name="name" type="xs:string"/>
-                    <xs:element name="short_name" type="xs:string"/>
-                    <xs:element name="type" type="tns:specialtyType"/>
                 </xs:sequence>
             </xs:complexType>
-            <xs:simpleType name="specialtyType">
-                <xs:restriction base="xs:string">
-                    <xs:enumeration value="BACHELOR"/>
-                    <xs:enumeration value="MAGISTR"/>
-                    <xs:enumeration value="SPECIAL"/>
-                    <xs:enumeration value="POSTGRAD"/>
-                </xs:restriction>
-            </xs:simpleType>
-        </xs:schema>
-    </wsdl:types>
-    <wsdl:message name="getSpecialtyResponse">
-        <wsdl:part element="tns:getSpecialtyResponse" name="getSpecialtyResponse"> </wsdl:part>
-    </wsdl:message>
-    <wsdl:message name="getSpecialtyRequest">
-        <wsdl:part element="tns:getSpecialtyRequest" name="getSpecialtyRequest"> </wsdl:part>
-    </wsdl:message>
-    <wsdl:portType name="SpecialtyPort">
-        <wsdl:operation name="getSpecialty">
-            <wsdl:input message="tns:getSpecialtyRequest" name="getSpecialtyRequest"> </wsdl:input>
-            <wsdl:output message="tns:getSpecialtyResponse" name="getSpecialtyResponse"> </wsdl:output>
-        </wsdl:operation>
-    </wsdl:portType>
-    <wsdl:binding name="SpecialtyPortSoap11" type="tns:SpecialtyPort">
-        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
-        <wsdl:operation name="getSpecialty">
-            <soap:operation soapAction=""/>
-            <wsdl:input name="getSpecialtyRequest">
-                <soap:body use="literal"/>
-            </wsdl:input>
-            <wsdl:output name="getSpecialtyResponse">
-                <soap:body use="literal"/>
-            </wsdl:output>
-        </wsdl:operation>
-    </wsdl:binding>
-    <wsdl:service name="SpecialtyPortService">
-        <wsdl:port binding="tns:SpecialtyPortSoap11" name="SpecialtyPortSoap11">
-            <soap:address location="http://localhost:8080/ws"/>
-        </wsdl:port>
-    </wsdl:service>
-</wsdl:definitions>
+        </xs:element>
+        <xs:element name="getAnswersByCodeResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="surveyList" type="tns:surveyList"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersByCurseRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="curse" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersByCurseResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="surveyList" type="tns:surveyList"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersByInstituteRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="institute" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersByInstituteResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="surveyList" type="tns:surveyList"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersByDepartmentRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="department" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersByDepartmentResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="surveyList" type="tns:surveyList"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersBySpecialtyRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="specialty" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersBySpecialtyResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="surveyList" type="tns:surveyList"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersByStudyFormRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="studyForm" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAnswersByStudyFormResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="surveyList" type="tns:surveyList"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAllRequest">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="fieldName" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:element name="getAllResponse">
+            <xs:complexType>
+                <xs:sequence>
+                    <xs:element name="resultList" type="tns:resultList"/>
+                </xs:sequence>
+            </xs:complexType>
+        </xs:element>
+        <xs:complexType name="survey">
+            <xs:sequence>
+                <xs:element name="id" type="xs:int"/>
+                <xs:element name="institute" type="xs:string"/>
+                <xs:element name="department" type="xs:string"/>
+                <xs:element name="specialtyCode" type="xs:string"/>
+                <xs:element name="specialty" type="xs:string"/>
+                <xs:element name="curse" type="xs:int"/>
+                <xs:element name="studyForm" type="xs:string"/>
+                <xs:element name="answer1" type="xs:string"/>
+                <xs:element name="answer2" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="surveyList">
+            <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                <xs:element maxOccurs="unbounded" name="value" type="tns:survey"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:complexType name="resultList">
+            <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                <xs:element maxOccurs="unbounded" name="value" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:schema>
+</wsdl:types>
+<wsdl:message name="getAnswersByInstituteRequest">
+<wsdl:part element="tns:getAnswersByInstituteRequest" name="getAnswersByInstituteRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByCodeRequest">
+<wsdl:part element="tns:getAnswersByCodeRequest" name="getAnswersByCodeRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByCurseRequest">
+<wsdl:part element="tns:getAnswersByCurseRequest" name="getAnswersByCurseRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByDepartmentResponse">
+<wsdl:part element="tns:getAnswersByDepartmentResponse" name="getAnswersByDepartmentResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByInstituteResponse">
+<wsdl:part element="tns:getAnswersByInstituteResponse" name="getAnswersByInstituteResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByCurseResponse">
+<wsdl:part element="tns:getAnswersByCurseResponse" name="getAnswersByCurseResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAllResponse">
+<wsdl:part element="tns:getAllResponse" name="getAllResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersBySpecialtyResponse">
+<wsdl:part element="tns:getAnswersBySpecialtyResponse" name="getAnswersBySpecialtyResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAllRequest">
+<wsdl:part element="tns:getAllRequest" name="getAllRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersBySpecialtyRequest">
+<wsdl:part element="tns:getAnswersBySpecialtyRequest" name="getAnswersBySpecialtyRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByStudyFormResponse">
+<wsdl:part element="tns:getAnswersByStudyFormResponse" name="getAnswersByStudyFormResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByDepartmentRequest">
+<wsdl:part element="tns:getAnswersByDepartmentRequest" name="getAnswersByDepartmentRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByStudyFormRequest">
+<wsdl:part element="tns:getAnswersByStudyFormRequest" name="getAnswersByStudyFormRequest"> </wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAnswersByCodeResponse">
+<wsdl:part element="tns:getAnswersByCodeResponse" name="getAnswersByCodeResponse"> </wsdl:part>
+</wsdl:message>
+<wsdl:portType name="SpecialtyPort">
+<wsdl:operation name="getAnswersByInstitute">
+    <wsdl:input message="tns:getAnswersByInstituteRequest" name="getAnswersByInstituteRequest"> </wsdl:input>
+    <wsdl:output message="tns:getAnswersByInstituteResponse" name="getAnswersByInstituteResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersByCode">
+    <wsdl:input message="tns:getAnswersByCodeRequest" name="getAnswersByCodeRequest"> </wsdl:input>
+    <wsdl:output message="tns:getAnswersByCodeResponse" name="getAnswersByCodeResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersByCurse">
+    <wsdl:input message="tns:getAnswersByCurseRequest" name="getAnswersByCurseRequest"> </wsdl:input>
+    <wsdl:output message="tns:getAnswersByCurseResponse" name="getAnswersByCurseResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersByDepartment">
+    <wsdl:input message="tns:getAnswersByDepartmentRequest" name="getAnswersByDepartmentRequest"> </wsdl:input>
+    <wsdl:output message="tns:getAnswersByDepartmentResponse" name="getAnswersByDepartmentResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAll">
+    <wsdl:input message="tns:getAllRequest" name="getAllRequest"> </wsdl:input>
+    <wsdl:output message="tns:getAllResponse" name="getAllResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersBySpecialty">
+    <wsdl:input message="tns:getAnswersBySpecialtyRequest" name="getAnswersBySpecialtyRequest"> </wsdl:input>
+    <wsdl:output message="tns:getAnswersBySpecialtyResponse" name="getAnswersBySpecialtyResponse"> </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersByStudyForm">
+    <wsdl:input message="tns:getAnswersByStudyFormRequest" name="getAnswersByStudyFormRequest"> </wsdl:input>
+    <wsdl:output message="tns:getAnswersByStudyFormResponse" name="getAnswersByStudyFormResponse"> </wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+<wsdl:binding name="SpecialtyPortSoap11" type="tns:SpecialtyPort">
+<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+<wsdl:operation name="getAnswersByInstitute">
+    <soap:operation soapAction=""/>
+    <wsdl:input name="getAnswersByInstituteRequest">
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="getAnswersByInstituteResponse">
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersByCode">
+    <soap:operation soapAction=""/>
+    <wsdl:input name="getAnswersByCodeRequest">
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="getAnswersByCodeResponse">
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersByCurse">
+    <soap:operation soapAction=""/>
+    <wsdl:input name="getAnswersByCurseRequest">
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="getAnswersByCurseResponse">
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersByDepartment">
+    <soap:operation soapAction=""/>
+    <wsdl:input name="getAnswersByDepartmentRequest">
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="getAnswersByDepartmentResponse">
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAll">
+    <soap:operation soapAction=""/>
+    <wsdl:input name="getAllRequest">
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="getAllResponse">
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersBySpecialty">
+    <soap:operation soapAction=""/>
+    <wsdl:input name="getAnswersBySpecialtyRequest">
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="getAnswersBySpecialtyResponse">
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAnswersByStudyForm">
+    <soap:operation soapAction=""/>
+    <wsdl:input name="getAnswersByStudyFormRequest">
+        <soap:body use="literal"/>
+    </wsdl:input>
+    <wsdl:output name="getAnswersByStudyFormResponse">
+        <soap:body use="literal"/>
+    </wsdl:output>
+</wsdl:operation>
+</wsdl:binding>
+<wsdl:service name="SpecialtyPortService">
+<wsdl:port binding="tns:SpecialtyPortSoap11" name="SpecialtyPortSoap11">
+    <soap:address location="http://localhost:8080/ws"/>
+</wsdl:port>
+</wsdl:service>
+        </wsdl:definitions>

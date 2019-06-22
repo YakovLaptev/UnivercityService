@@ -1,7 +1,7 @@
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://localhost:8080/soapservice"
            targetNamespace="http://localhost:8080/soapservice" elementFormDefault="qualified">
 
-    <xs:element name="getSurveyByCodeRequest">
+    <xs:element name="getAnswersByCodeRequest">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="code" type="xs:string"/>
@@ -9,7 +9,7 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:element name="getSurveyByCodeResponse">
+    <xs:element name="getAnswersByCodeResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="surveyList" type="tns:surveyList"/>
@@ -18,17 +18,97 @@
     </xs:element>
 
     <xs:element name="getAnswersByCurseRequest">
-        <xs:complexType>
-            <xs:sequence>
-                <xs:element name="curse" type="xs:int"/>
-            </xs:sequence>
-        </xs:complexType>
-    </xs:element>
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="curse" type="xs:int"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
 
     <xs:element name="getAnswersByCurseResponse">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="surveyList" type="tns:surveyList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersByInstituteRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="institute" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersByInstituteResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="surveyList" type="tns:surveyList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersByDepartmentRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="department" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersByDepartmentResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="surveyList" type="tns:surveyList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersBySpecialtyRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="specialty" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersBySpecialtyResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="surveyList" type="tns:surveyList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersByStudyFormRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="studyForm" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAnswersByStudyFormResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="surveyList" type="tns:surveyList"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fieldName" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="resultList" type="tns:resultList"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
@@ -47,10 +127,15 @@
         </xs:sequence>
     </xs:complexType>
 
-
     <xs:complexType name="surveyList">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
             <xs:element name="value" type="tns:survey" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="resultList">
+        <xs:sequence minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="value" type="xs:string" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>
