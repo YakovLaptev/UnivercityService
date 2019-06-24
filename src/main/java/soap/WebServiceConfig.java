@@ -29,7 +29,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("SpecialtyPort");
         wsdl11Definition.setLocationUri("/ws");
-        wsdl11Definition.setTargetNamespace("http://localhost:8080/soapservice");
+        wsdl11Definition.setTargetNamespace("http://192.168.137.126:8080/soapservice");
         wsdl11Definition.setSchema(specialtySchema);
         return wsdl11Definition;
     }
@@ -45,7 +45,7 @@ public class WebServiceConfig extends WsConfigurerAdapter {
         String[] packagesToScan= {"localhost._8080"};
         marshaller.setPackagesToScan(packagesToScan);
         SurveyClient client = new SurveyClient();
-        client.setDefaultUri("http://localhost:8080/ws");
+        client.setDefaultUri("http://192.168.137.126:8080/ws");
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;

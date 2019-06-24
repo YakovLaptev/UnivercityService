@@ -14,10 +14,10 @@ public class Application {
     public static void main(String[] args) {
         //SpringApplication.run(Application.class, args);
         ApplicationContext ctx = SpringApplication.run(Application.class, args);
-        SurveyClient surveyClient = ctx.getBean(SurveyClient.class);
-
-        GetAllResponse response = surveyClient.getAllResponse("specialty");
-        System.out.println("Result: "+response.getResultList().getValue());
+//        SurveyClient surveyClient = ctx.getBean(SurveyClient.class);
+//
+//        GetAllResponse response = surveyClient.getAllResponse("specialty");
+//        System.out.println("Result: "+response.getResultList().getValue());
 
 
         //SpecialtiesClient specialtiesClient = ctx.getBean(SpecialtiesClient.class);

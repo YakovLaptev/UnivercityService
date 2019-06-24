@@ -8,12 +8,12 @@ import soap.entity.Survey;
 import java.util.List;
 
 public interface SurveyRepository extends JpaRepository<Survey, Integer> {
-    List<Survey> findBySpecialtyCode(String code);
-    List<Survey> findByCurse(int curse);
-    List<Survey> findByDepartment(String department);
-    List<Survey> findByInstitute(String institute);
-    List<Survey> findBySpecialty(String specialty);
-    List<Survey> findByStudyForm(String studyForm);
+    List<Survey> findAllBySpecialtyCode(String specialtyCode);
+    List<Survey> findAllByCurse(int curse);
+    List<Survey> findAllByDepartment(String department);
+    List<Survey> findAllByInstitute(String institute);
+    List<Survey> findAllBySpecialty(String specialty);
+    List<Survey> findAllByStudyForm(String studyForm);
 
     @Query(value = "SELECT * FROM Survey group by institute", nativeQuery = true)
     List<Survey> findAllGroupByinstitute();

@@ -135,7 +135,7 @@
 
     <xs:complexType name="resultList">
         <xs:sequence minOccurs="0" maxOccurs="unbounded">
-            <xs:element name="value" type="xs:string" maxOccurs="unbounded"/>
+            <xs:element name="item" type="xs:string" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
 </xs:schema>

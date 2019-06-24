@@ -14,15 +14,16 @@ import java.util.*;
 
 @Endpoint
 public class SurveyEndpoint {
-    private static final String NAMESPACE_URI = "http://localhost:8080/soapservice";
+    private static final String NAMESPACE_URI = "http://192.168.137.126:8080/soapservice";
 
     private SurveyRepository surveyRepository;
 
     private SurveyList makeSurveyList(List<Survey> survey) {
         SurveyList returnArray = new SurveyList();
         List<localhost._8080.soapservice.Survey> surveyList = new ArrayList<>();
-        localhost._8080.soapservice.Survey surv = new localhost._8080.soapservice.Survey();
+        localhost._8080.soapservice.Survey surv;
         for (Survey elem:survey) {
+            surv = new localhost._8080.soapservice.Survey();
             surv.setId(elem.getId());
             surv.setInstitute(elem.getInstitute());
             surv.setDepartment(elem.getDepartment());
@@ -47,7 +48,7 @@ public class SurveyEndpoint {
     @ResponsePayload
     public GetAnswersByCodeResponse getAnswersByCodeResponse(@RequestPayload GetAnswersByCodeRequest request) {
         GetAnswersByCodeResponse response = new GetAnswersByCodeResponse();
-        List<Survey> survey = surveyRepository.findBySpecialtyCode(request.getCode());
+        List<Survey> survey = surveyRepository.findAllBySpecialtyCode(request.getCode());
         response.setSurveyList(makeSurveyList(survey));
         return response;
     }
@@ -56,7 +57,7 @@ public class SurveyEndpoint {
     @ResponsePayload
     public GetAnswersByCurseResponse getAnswersByCurseResponse(@RequestPayload GetAnswersByCurseRequest request) {
         GetAnswersByCurseResponse response = new GetAnswersByCurseResponse();
-        List<Survey> survey = surveyRepository.findByCurse(request.getCurse());
+        List<Survey> survey = surveyRepository.findAllByCurse(request.getCurse());
         response.setSurveyList(makeSurveyList(survey));
         return response;
     }
@@ -65,7 +66,7 @@ public class SurveyEndpoint {
     @ResponsePayload
     public GetAnswersByDepartmentResponse getAnswersByDepartmentResponse(@RequestPayload GetAnswersByDepartmentRequest request) {
         GetAnswersByDepartmentResponse response = new GetAnswersByDepartmentResponse();
-        List<Survey> survey = surveyRepository.findByDepartment(request.getDepartment());
+        List<Survey> survey = surveyRepository.findAllByDepartment(request.getDepartment());
         response.setSurveyList(makeSurveyList(survey));
         return response;
     }
@@ -74,7 +75,7 @@ public class SurveyEndpoint {
     @ResponsePayload
     public GetAnswersByInstituteResponse getAnswersByInstituteResponse(@RequestPayload GetAnswersByInstituteRequest request) {
         GetAnswersByInstituteResponse response = new GetAnswersByInstituteResponse();
-        List<Survey> survey = surveyRepository.findByInstitute(request.getInstitute());
+        List<Survey> survey = surveyRepository.findAllByInstitute(request.getInstitute());
         response.setSurveyList(makeSurveyList(survey));
         return response;
     }
@@ -83,7 +84,7 @@ public class SurveyEndpoint {
     @ResponsePayload
     public GetAnswersBySpecialtyResponse getAnswersBySpecialtyResponse(@RequestPayload GetAnswersBySpecialtyRequest request) {
         GetAnswersBySpecialtyResponse response = new GetAnswersBySpecialtyResponse();
-        List<Survey> survey = surveyRepository.findBySpecialty(request.getSpecialty());
+        List<Survey> survey = surveyRepository.findAllBySpecialty(request.getSpecialty());
         response.setSurveyList(makeSurveyList(survey));
         return response;
     }
@@ -92,7 +93,7 @@ public class SurveyEndpoint {
     @ResponsePayload
     public GetAnswersByStudyFormResponse getAnswersByCurseResponse(@RequestPayload GetAnswersByStudyFormRequest request) {
         GetAnswersByStudyFormResponse response = new GetAnswersByStudyFormResponse();
-        List<Survey> survey = surveyRepository.findByStudyForm(request.getStudyForm());
+        List<Survey> survey = surveyRepository.findAllByStudyForm(request.getStudyForm());
         response.setSurveyList(makeSurveyList(survey));
         return response;
     }
@@ -115,7 +116,7 @@ public class SurveyEndpoint {
             returnArray.add(field.get(elem).toString());
         }
         ResultList resultList = new ResultList();
-        resultList.setValue(returnArray);
+        resultList.setItem(returnArray);
         response.setResultList(resultList);
         return response;
     }
