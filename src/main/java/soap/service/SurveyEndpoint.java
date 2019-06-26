@@ -4,6 +4,7 @@ import localhost._8080.soapservice.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.*;
 import soap.entity.Survey;
+import soap.repository.QuestionRepository;
 import soap.repository.SurveyRepository;
 
 import java.lang.reflect.Field;
@@ -17,6 +18,7 @@ public class SurveyEndpoint {
     private static final String NAMESPACE_URI = "http://192.168.137.126:8080/soapservice";
 
     private SurveyRepository surveyRepository;
+    private QuestionRepository questionRepository;
 
     private SurveyList makeSurveyList(List<Survey> survey) {
         SurveyList returnArray = new SurveyList();
@@ -40,8 +42,9 @@ public class SurveyEndpoint {
     }
 
     @Autowired
-    public SurveyEndpoint(SurveyRepository surveyRepository) {
+    public SurveyEndpoint(SurveyRepository surveyRepository, QuestionRepository questionRepository) {
         this.surveyRepository = surveyRepository;
+        this.questionRepository = questionRepository;
     }
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAnswersByCodeRequest")
@@ -121,5 +124,25 @@ public class SurveyEndpoint {
         return response;
     }
 
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllQuestionRequest")
+    @ResponsePayload
+    public GetAllQuestionResponse getAllQuestionResponse(@RequestPayload GetAllQuestionRequest request) {
+        GetAllQuestionResponse response = new GetAllQuestionResponse();
+        System.out.println("getAllQuestionResponse ");
+        List<soap.entity.Question> questions = questionRepository.findAll();
+        System.out.println("questions "+questions.size());
+        QuestionList returnArray = new QuestionList();
+        List<localhost._8080.soapservice.Question> surveyList = new ArrayList<>();
+        localhost._8080.soapservice.Question question;
+        for (soap.entity.Question elem:questions) {
+            question = new localhost._8080.soapservice.Question();
+            question.setId(elem.getId());
+            question.setText(elem.getText());
+            surveyList.add(question);
+        }
+        returnArray.setQuestion(surveyList);
+        response.setQuestionList(returnArray);
+        return response;
+    }
 
 }
